@@ -6,7 +6,7 @@ const Login = ({handleLogin}) => {
     const [password, setPassword] = useState('');
 
    const submitHandler = (e) =>{
-     e.preventDefault();
+     e.preventDefault(); 
      handleLogin(email,password) 
      setEmail("");
      setPassword("");
