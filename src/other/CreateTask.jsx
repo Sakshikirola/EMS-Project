@@ -9,7 +9,7 @@ const CreateTask = () => {
     const [taskTitle, setTaskTitle] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
     const [taskDate, setTaskDate] = useState('')
-    const [asignTo, setAsignTo] = useState('')
+    const [asignTo, setAsignTo] = useState('') 
     const [category, setCategory] = useState('') 
 
     const submitHandler = (e) => {
@@ -41,10 +41,11 @@ const CreateTask = () => {
       }) 
 
     setUserData(updatedData) 
-      localStorage.setItem(
-     'employees',
-     JSON.stringify(updatedData)
-    )
+     localStorage.setItem(
+      'employeesData',
+     JSON.stringify({ employees: updatedData })
+     )
+
 
         setTaskTitle('')
         setCategory('')

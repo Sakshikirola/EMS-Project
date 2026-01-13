@@ -7,7 +7,7 @@ import { AuthContext } from './context/AuthProvider'
 const App = () => {
 
   const [user, setUser] = useState(null)
-  const [loggedInUserData, setLoggedInUserData] = useState(null)
+  const [loggedInUserData, setLoggedInUserData] = useState(null) 
   const [userData,SetUserData] = useContext(AuthContext)
 
   useEffect(()=>{
@@ -23,21 +23,32 @@ const App = () => {
 
 
   const handleLogin = (email, password) => {
-    if (email == 'admin@company.com' && password == '123') {
+    if (email === 'admin@company.com' && password === '123') {
       setUser('admin')  
-      localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin' }))
-    } else if (userData) {
-      const employee = userData.find((e) => email == e.email && password == e.password)
-      if (employee) {
-        setUser('employee')
-        setLoggedInUserData(employee)
-        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee',data:employee }))
-      }
-    }
-    else {
-      alert("Invalid Credentials")
-    }
+      localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin',data:null })
+    )
+    return 
+    } 
+    if (!userData || userData.length === 0) {
+    alert("Employee data not loaded yet. Please refresh.")
+    return
   }
+
+  const employee = userData.find(
+    (e) => e.email === email && e.password === password
+  )
+
+  if (!employee) {
+    alert("Invalid Credentials")
+    return
+  }
+  setUser('employee')
+  setLoggedInUserData(employee)
+  localStorage.setItem(
+    'loggedInUser',
+    JSON.stringify({ role: 'employee', data: employee })
+  )
+}
 
   return (
     <>
